@@ -14,7 +14,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapScalarApiReference();
+    app.MapScalarApiReference(options =>
+    {
+        // Optional: Use C# and HttpClient as the default for code examples in the Scalar GUI
+        options.WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+    });
 }
 
 app.UseHttpsRedirection();
